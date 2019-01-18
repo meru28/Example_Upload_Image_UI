@@ -5,7 +5,7 @@ import { CustomInput } from 'reactstrap';
 class ManageBrand extends Component {
     state= { brandList: [], AddBrandImage: 'Pilih Gambar', EditBrandImage: 'Pilih Gambar', selectedEditBrandId: 0 }
     componentDidMount() {
-        axios.get('https://api-mysql.herokuapp.com/getlistbrand')
+        axios.get('https://api-mysql.herokuapp.com/brand/getlistbrand')
         .then((res) => {
             this.setState({ brandList: res.data })
         })
@@ -28,7 +28,7 @@ class ManageBrand extends Component {
             }
             formData.append('data', JSON.stringify(data))
 
-            axios.post("https://api-mysql.herokuapp.com/addbrand", formData, headers)
+            axios.post("https://api-mysql.herokuapp.com/brand/addbrand", formData, headers)
             .then((res) => {
                 alert("Add Brand Success")
                 this.setState({ brandList: res.data })
@@ -44,7 +44,7 @@ class ManageBrand extends Component {
 
     onBtnDeleteClick = (id) => {
         if(window.confirm('Are you sure to delete?')) {
-            axios.delete('https://api-mysql.herokuapp.com/deletebrand/' + id)
+            axios.delete('https://api-mysql.herokuapp.com/brand/deletebrand/' + id)
             .then((res) => {
                 alert('Delete Success');
                 this.setState({ brandList: res.data })
@@ -72,7 +72,7 @@ class ManageBrand extends Component {
         }
         formData.append('data', JSON.stringify(data))
 
-        axios.put("https://api-mysql.herokuapp.com/editbrand/" + id, formData, headers)
+        axios.put("https://api-mysql.herokuapp.com/brand/editbrand/" + id, formData, headers)
         .then((res) => {
             alert("Edit Brand Success")
             this.setState({ brandList: res.data, selectedEditBrandId: 0 })
@@ -117,7 +117,7 @@ class ManageBrand extends Component {
                 <tr>
                     <td>{item.id}</td>
                     <td>{item.nama}</td>
-                    <td><img src={`https://api-mysql.herokuapp.com${item.image}`} alt={item.nama} width={100} /></td>
+                    <td><img src={`https://api-mysql.herokuapp.com/brand${item.image}`} alt={item.nama} width={100} /></td>
                     <td><input type="button" class="btn btn-primary" value="Edit" onClick={() => this.setState({selectedEditBrandId:item.id})} /></td>
                     <td><input type="button" class="btn btn-danger" value="Delete" onClick={() => this.onBtnDeleteClick(item.id)} /></td>
                 </tr>
