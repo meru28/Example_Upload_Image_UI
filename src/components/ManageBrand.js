@@ -117,7 +117,7 @@ class ManageBrand extends Component {
                 <tr>
                     <td>{item.id}</td>
                     <td>{item.nama}</td>
-                    <td><img src={`https://api-mysql.herokuapp.com${item.image}`} alt={item.nama} width={100} /></td>
+                    <td><img src={`https://api-mysql-meru.herokuapp.com${item.image}`} alt={item.nama} width={100} /></td>
                     <td><input type="button" class="btn btn-primary" value="Edit" onClick={() => this.setState({selectedEditBrandId:item.id})} /></td>
                     <td><input type="button" class="btn btn-danger" value="Delete" onClick={() => this.onBtnDeleteClick(item.id)} /></td>
                 </tr>
